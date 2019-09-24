@@ -16,9 +16,9 @@
         
     	<div class="generic-container" ng-controller="UserController as ctrl" ng-init="ctrl.init()">
 			<form name="login">
-				Username: <input type="text" ng-model="ctrl.usernameLogin" placeholder="Username" required/>
+				Username: <input type="text" ng-model="ctrl.user.username" placeholder="Username" required/>
 				<br>
-				Password: <input type="password" ng-model="ctrl.passwordLogin" placeholder="Password" required/>
+				Password: <input type="password" ng-model="ctrl.user.password" placeholder="Password" required/>
 				<br>
             	<button type="button" ng-click="ctrl.login()">Login</button>
             	<br>

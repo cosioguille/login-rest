@@ -27,15 +27,14 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
         
     }
     
-    function login(user, pass){
+    function login(user){
     	
     	var deferred = $q.defer();
         
-        $http.get(REST_SERVICE_URI+'authenticate',
-        		{params: {username: user, password: pass} }).
+        $http.post(REST_SERVICE_URI+'authenticate', user).
             then(
                 function (response){
-                    deferred.resolve(response.data);
+                    deferred.resolve(response.data.response);
                 },
                 function (error){
                     deferred.reject(error);

@@ -1,6 +1,7 @@
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\controller\AuthenticateController.java
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\config\MyWebAppInitializer.java
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\repository\UserRepository.java
+C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\pojo\StringResponse.java
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\model\User.java
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\service\UserServiceImp.java
 C:\Users\1729882\eclipse-workspace\login-rest\src\main\java\com\cosioguille\service\UserService.java

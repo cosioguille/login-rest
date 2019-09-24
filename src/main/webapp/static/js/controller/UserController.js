@@ -3,8 +3,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    var self = this;
 	    self.users;
 	    self.error;
-	    self.usernameLogin;
-	    self.passwordLogin;
+	    self.user;
 	    self.usernameRegister;
 	    self.passwordRegister;
 	    self.confirmPasswordRegister;
@@ -20,8 +19,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    //Reset controller
 	    function init(){
 	    	self.error = "";
-	    	self.usernameLogin = "";
-	    	self.passwordLogin = "";
+	    	self.user = {id: 0, username: '', password: ''};
 		    self.usernameRegister = "";
 		    self.passwordRegister = "";
 		    self.confirmPasswordRegister = "";
@@ -51,24 +49,23 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    	
 	    	self.error = "";
 	    		
-	    	if(!self.usernameLogin){
+	    	if(!self.user.username){
 	    		self.error += "Username cannot be empty! ";
-	    	} else if (self.usernameLogin.length < 5){
+	    	} else if (self.user.username.length < 5){
 	    		self.error += "Username cannot be less than 5 characters! ";
 	    	}
 	    	
-	    	if(!self.passwordLogin){
+	    	if(!self.user.password){
 	    		self.error += "Password cannot be empty! ";
-	    	} else if (self.passwordLogin.length < 8){
+	    	} else if (self.user.password.length < 8){
 	    		self.error += "Password cannot be less than 8 characters! ";
 	    	}
 	    	
 	    	if(!self.error){
 	    		//Login Service
-	    		UserService.login(self.usernameLogin, self.passwordLogin)
+	    		UserService.login(self.user)
 	            .then(
 	            function(response){
-		    		console.log("Login Valid");
 		    		console.log(response);
 	            },
 	            function(errResponse){

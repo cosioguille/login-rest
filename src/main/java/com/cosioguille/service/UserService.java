@@ -17,5 +17,7 @@ public interface UserService {
    public void deleteUser(int id);
    
    public boolean existsUser(int id);
+   
+   public boolean authenticate(User user);
 
 }

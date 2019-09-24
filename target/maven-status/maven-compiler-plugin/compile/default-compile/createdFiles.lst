@@ -4,6 +4,7 @@ com\cosioguille\controller\AuthenticateController.class
 com\cosioguille\service\UserService.class
 com\cosioguille\config\CORSFilter.class
 com\cosioguille\config\WebConfig.class
+com\cosioguille\pojo\StringResponse.class
 com\cosioguille\repository\UserRepository.class
 com\cosioguille\config\AppConfig.class
 com\cosioguille\service\UserServiceImp.class
