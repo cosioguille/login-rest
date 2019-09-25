@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosioguille.model.User;
+import com.cosioguille.pojo.StringResponse;
 import com.cosioguille.service.UserService;
 
 @RestController
@@ -40,12 +41,12 @@ public class UserController {
    }
    
    @RequestMapping(value = "", method = RequestMethod.POST)
-   public ResponseEntity<String> saveUser(@RequestBody User user)
+   public ResponseEntity<?> saveUser(@RequestBody User user)
    {
 	   user.setId(0);
 	   
 	   String error = "";
-	   String message = "";
+	   StringResponse message = new StringResponse("");
 	   HttpStatus status = HttpStatus.OK;
 	   
 	   if(user.getUsername() == null) {
@@ -59,6 +60,12 @@ public class UserController {
 	   } else if (user.getUsername().length() < 4) {
 		   
 		   error += "\nUser's username cannot be shorter than 4 characters!";
+		   
+	   } else if (userService.existsUserByUsername(user.getUsername())) {
+		   
+		   message.setResponse("Username already taken!");
+		   status = HttpStatus.OK;
+		   return new ResponseEntity<>(message, status);
 		   
 	   }
 	   
@@ -78,7 +85,7 @@ public class UserController {
 	   
 	   if(!error.equals("")) {
 		   
-		   message = String.format("[BAD REQUEST] The request is not correct because the following errors:%s", error);
+		   message.setResponse(String.format("[BAD REQUEST] The request is not correct because the following errors:%s", error));
 		   status = HttpStatus.BAD_REQUEST;
 	   
 	   } else {
@@ -86,12 +93,12 @@ public class UserController {
 		   try {
 			   
 			   User saved = userService.saveUser(user);
-			   message = String.format("New user added correctly!\n%s", saved);
+			   message.setResponse(String.format("New user %s created!", saved.getUsername()));
 			   status = HttpStatus.OK;
 			   
 		   } catch (Exception ex) {
 			   
-			   message = String.format("[INTERNAL SERVER ERROR] \n%s", ex);
+			   message.setResponse(String.format("[INTERNAL SERVER ERROR] \n%s", ex));
 			   status = HttpStatus.INTERNAL_SERVER_ERROR;
 			   
 		   }

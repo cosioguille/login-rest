@@ -4,7 +4,8 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
  
     var factory = {
 		getUsers: getUsers,
-		login: login
+		login: login,
+		register: register
     };
  
     return factory;
@@ -32,6 +33,24 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
     	var deferred = $q.defer();
         
         $http.post(REST_SERVICE_URI+'authenticate', user).
+            then(
+                function (response){
+                    deferred.resolve(response.data);
+                },
+                function (error){
+                    deferred.reject(error);
+                }
+        );
+        
+        return deferred.promise;
+    	
+    }
+    
+    function register(user){
+    	
+    	var deferred = $q.defer();
+        
+        $http.post(REST_SERVICE_URI+BODY, user).
             then(
                 function (response){
                     deferred.resolve(response.data.response);

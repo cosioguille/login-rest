@@ -18,6 +18,8 @@ public interface UserService {
    
    public boolean existsUser(int id);
    
+   public boolean existsUserByUsername(String username);
+   
    public boolean authenticate(User user);
 
 }

@@ -21,12 +21,8 @@ public class AuthenticateController {
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<?> authenticate(@RequestBody User user) {
-
-		System.out.println(userService.authenticate(user));
 		
-		StringResponse message = new StringResponse("LOGGED Username: "+user.getUsername()+" Password: "+user.getPassword());
-		
-		return new ResponseEntity<>(message, HttpStatus.OK);
+		return new ResponseEntity<>(userService.authenticate(user), HttpStatus.OK);
 		
 	}
 

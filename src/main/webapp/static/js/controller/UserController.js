@@ -2,11 +2,10 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	function($scope, $window, UserService) {
 	    var self = this;
 	    self.users;
-	    self.error;
+	    self.alert;
 	    self.user;
-	    self.usernameRegister;
-	    self.passwordRegister;
-	    self.confirmPasswordRegister;
+	    self.userRegister;
+	    self.confirmPassword;
 	    
 	    //Methods
 	    self.init = init;
@@ -18,11 +17,10 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    
 	    //Reset controller
 	    function init(){
-	    	self.error = "";
+	    	self.alert = '';
 	    	self.user = {id: 0, username: '', password: ''};
-		    self.usernameRegister = "";
-		    self.passwordRegister = "";
-		    self.confirmPasswordRegister = "";
+	    	self.userRegister = { id: 0, username: '', password: ''};
+		    self.confirmPassword = '';
 	    }
 	    
 	    function getUsers(){
@@ -47,29 +45,34 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    
 	    function login(){
 	    	
-	    	self.error = "";
+	    	self.alert = "";
 	    		
 	    	if(!self.user.username){
-	    		self.error += "Username cannot be empty! ";
+	    		self.alert += "Username cannot be empty! ";
 	    	} else if (self.user.username.length < 5){
-	    		self.error += "Username cannot be less than 5 characters! ";
+	    		self.alert += "Username cannot be less than 5 characters! ";
 	    	}
 	    	
 	    	if(!self.user.password){
-	    		self.error += "Password cannot be empty! ";
+	    		self.alert += "Password cannot be empty! ";
 	    	} else if (self.user.password.length < 8){
-	    		self.error += "Password cannot be less than 8 characters! ";
+	    		self.alert += "Password cannot be less than 8 characters! ";
 	    	}
 	    	
-	    	if(!self.error){
+	    	if(!self.alert){
 	    		//Login Service
 	    		UserService.login(self.user)
 	            .then(
 	            function(response){
-		    		console.log(response);
+	            	if(response){
+	            		//Correct Authenticate
+	            		self.alert += "Login Successful!";
+	            	} else {
+	            		self.alert += "Incorrect Login!";
+	            	}
 	            },
 	            function(errResponse){
-	                console.error("Error while getting Users");
+	                console.error("Error on Login: " + errResponse);
 	            }
 	        );
 	    	}
@@ -77,29 +80,36 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
 	    
 	    function register(){
 	    	
-	    	self.error = "";
+	    	self.alert = "";
 	    	
-	    	if(!self.usernameRegister){
-	    		self.error += "Username cannot be empty! ";
-	    	} else if (self.usernameRegister.length < 5){
-	    		self.error += "Username cannot be less than 5 characters! ";
+	    	if(!self.userRegister.username){
+	    		self.alert += "Username cannot be empty! ";
+	    	} else if (self.userRegister.username.length < 5){
+	    		self.alert += "Username cannot be less than 5 characters! ";
 	    	}
 	    	
-	    	if(!self.passwordRegister){
-	    		self.error += "Password cannot be empty! ";
-	    	} else if (self.passwordRegister.length < 8){
-	    		self.error += "Password cannot be less than 8 characters! ";
-	    	} else if(!self.confirmPasswordRegister){
-	    		self.error += "Please confirm your password! ";
-	    	} else if (self.passwordRegister != self.confirmPasswordRegister){
-	    		self.error += "Password confirmation is not the same! ";
+	    	if(!self.userRegister.password){
+	    		self.alert += "Password cannot be empty! ";
+	    	} else if (self.userRegister.password.length < 8){
+	    		self.alert += "Password cannot be less than 8 characters! ";
+	    	} else if(!self.confirmPassword){
+	    		self.alert += "Please confirm your password! ";
+	    	} else if (self.userRegister.password != self.confirmPassword){
+	    		self.alert += "Password confirmation is not the same! ";
 	    	}
 	    	
-	    	if(!self.error){
+	    	if(!self.alert){
 	    		//Register Service
-	    		console.log("Register Valid");
+	    		UserService.register(self.userRegister)
+	            .then(
+	            function(response){
+		    		self.alert += response;
+	            },
+	            function(errResponse){
+	            	console.error("Error on Register: " + errResponse);
+	            }
+            );
 	    	}
-	    	
 	    }
 	}
 ]);

@@ -16,17 +16,17 @@
         
     	<div class="generic-container" ng-controller="UserController as ctrl" ng-init="ctrl.init()">
 			<form name="register">
-				Username: <input type="text" ng-model="ctrl.usernameRegister" placeholder="Username" required/>
+				Username: <input type="text" ng-model="ctrl.userRegister.username" placeholder="Username" required/>
 				<br>
-				Password: <input type="password" ng-model="ctrl.passwordRegister" placeholder="Password" required/>
+				Password: <input type="password" ng-model="ctrl.userRegister.password" placeholder="Password" required/>
 				<br>
-				Confirm Password: <input type="password" ng-model="ctrl.confirmPasswordRegister" placeholder="Confirm Password" required/>
+				Confirm Password: <input type="password" ng-model="ctrl.confirmPassword" placeholder="Confirm Password" required/>
 				<br>
             	<button type="button" ng-click="ctrl.register()">Register</button>
             	<br>
             	<button type="button" ng-click="ctrl.goLogin()">Cancel</button>
             	<br>
-            	<p ng-hide="ctrl.error == ''">{{ctrl.error}}</p>
+            	<p ng-hide="ctrl.alert == ''">{{ctrl.alert}}</p>
 			</form>
 		</div>
         

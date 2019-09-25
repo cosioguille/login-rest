@@ -24,7 +24,7 @@
             	<br>
             	<button type="button" ng-click="ctrl.goRegister()">Register</button>
             	<br>
-            	<p ng-hide="ctrl.error == ''">{{ctrl.error}}</p>
+            	<p ng-hide="ctrl.alert == ''">{{ctrl.alert}}</p>
 			</form>
 		</div>
         
