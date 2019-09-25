@@ -83,6 +83,12 @@ public class UserController {
 		   
 	   }
 	   
+	   if(user.getRol() == null) {
+		   
+		   error += "\nUser's rol cannot be empty!";
+		   
+	   }
+	   
 	   if(!error.equals("")) {
 		   
 		   message.setResponse(String.format("[BAD REQUEST] The request is not correct because the following errors:%s", error));
@@ -164,6 +170,12 @@ public class UserController {
 	   } else if (user.getPassword().length() < 8) {
 		   
 		   error += "\nUser's password cannot be shorter than 8 characters!";
+		   
+	   }
+	   
+	   if(user.getRol() == null) {
+		   
+		   error += "\nUser's rol cannot be empty!";
 		   
 	   }
 	   
