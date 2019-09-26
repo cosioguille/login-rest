@@ -1,12 +1,17 @@
 package com.cosioguille.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.cosioguille.model.Rol;
 
@@ -24,9 +29,13 @@ public class User {
     @Column(name = "password")
     private String password;
     
-    @ManyToOne
-    @JoinColumn(name="rol_id", nullable=false)
-    private Rol rol;
+    @ManyToMany(fetch = FetchType.EAGER,
+    		cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
+    @JoinTable(
+	  name = "user_rol",
+	  joinColumns = @JoinColumn(name = "user_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles;
 
 	public int getId() {
 		return id;
@@ -52,11 +61,11 @@ public class User {
 		this.password = password;
 	}
 	
-	public Rol getRol() {
-		return rol;
+	public Set<Rol> getRoles() {
+		return roles;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setRol(Set<Rol> roles) {
+		this.roles = roles;
 	}
 }

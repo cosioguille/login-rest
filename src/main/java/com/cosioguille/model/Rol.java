@@ -8,9 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.cosioguille.model.User;
 
 @Entity(name = "roles")
@@ -24,8 +24,8 @@ public class Rol {
     @Column(name = "rol_name")
     private String name;
     
-    @OneToMany(mappedBy = "rol", fetch = FetchType.EAGER)
-    @JsonBackReference
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy="roles")
+    @JsonIgnore
     private Set<User> users;
 
 	public int getId() {

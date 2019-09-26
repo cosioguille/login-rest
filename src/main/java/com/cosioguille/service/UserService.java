@@ -2,6 +2,8 @@ package com.cosioguille.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.cosioguille.model.User;
 
 public interface UserService {

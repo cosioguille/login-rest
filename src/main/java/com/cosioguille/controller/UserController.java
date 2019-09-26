@@ -20,13 +20,13 @@ import com.cosioguille.service.UserService;
 @RestController
 @RequestMapping("/users")
 public class UserController {
- 
+
    @Autowired
    private UserService userService;
- 
+
    @RequestMapping(value = "", method = RequestMethod.GET)
    public ResponseEntity<?> getUsers()
-   {  
+   {
       List<User> users = userService.getUsers();
       
       if(users.isEmpty()) {
@@ -83,7 +83,7 @@ public class UserController {
 		   
 	   }
 	   
-	   if(user.getRol() == null) {
+	   if(user.getRoles() == null) {
 		   
 		   error += "\nUser's rol cannot be empty!";
 		   
@@ -173,7 +173,7 @@ public class UserController {
 		   
 	   }
 	   
-	   if(user.getRol() == null) {
+	   if(user.getRoles() == null) {
 		   
 		   error += "\nUser's rol cannot be empty!";
 		   

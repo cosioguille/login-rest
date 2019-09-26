@@ -15,15 +15,15 @@ import com.cosioguille.service.UserService;
 @RestController
 @RequestMapping("/authenticate")
 public class AuthenticateController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<?> authenticate(@RequestBody User user) {
-		
+
 		return new ResponseEntity<>(userService.authenticate(user), HttpStatus.OK);
-		
+
 	}
 
 }
