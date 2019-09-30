@@ -18,10 +18,10 @@ public class Rol {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rol_id")
+    @Column(name = "role_id")
     private int id;
 
-    @Column(name = "rol_name")
+    @Column(name = "role_name")
     private String name;
     
     @ManyToMany(fetch = FetchType.EAGER, mappedBy="roles")
